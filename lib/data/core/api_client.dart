@@ -13,10 +13,10 @@ class APIClient {
     storage = FlutterSecureStorage();
   }
 
-  dynamic postAuthData(String pathSegment, Map<String, dynamic> body) async {
+  dynamic postAuthData(String resource, dynamic body) async {
     try {
       response = await dio.post(
-          '${APIConstants.PROD_BASE_URL}${APIConstants.AUTH_SEGMENT}/$pathSegment',
+          '${APIConstants.PROD_BASE_URL}${APIConstants.AUTH_SEGMENT}/$resource',
           data: body);
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
@@ -114,6 +114,71 @@ class APIClient {
         print(err.response.data);
       } else {
         print(err.message);
+      }
+    }
+  }
+
+  dynamic addCartItem({String resource, dynamic body}) async {
+    try {
+      response = await dio.post(
+          '${APIConstants.PROD_BASE_URL}${APIConstants.CART_SEGMENT}/$resource',
+          data: body);
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 204) {
+        print(response.data);
+        return response.data;
+      } else {
+        print(response.statusCode);
+        print(response.statusMessage);
+        throw Exception(response.statusMessage);
+      }
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+      } else {
+        print(e.message);
+      }
+    }
+  }
+
+  dynamic deleteCartItem({String resource, dynamic body}) async {
+    try {
+      response = await dio.post(
+          '${APIConstants.PROD_BASE_URL}${APIConstants.CART_SEGMENT}/$resource',
+          data: body);
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 204) {
+        print(response.data);
+        return response.data;
+      } else {
+        print(response.statusCode);
+        print(response.statusMessage);
+        throw Exception(response.statusMessage);
+      }
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+      } else {
+        print(e.message);
+      }
+    }
+  }
+
+  dynamic deleteAllCartItems({String resource}) async {
+    try {
+      response = await dio.delete(
+        '${APIConstants.PROD_BASE_URL}${APIConstants.CART_SEGMENT}/$resource',
+      );
+      print(response.statusCode);
+      print(response.data);
+      return response.data;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response.data);
+      } else {
+        print(e.message);
       }
     }
   }

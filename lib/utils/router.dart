@@ -4,6 +4,7 @@ import 'package:sell_streams/presentation/journeys/auth/register.dart';
 import 'package:sell_streams/presentation/journeys/landing.dart';
 import 'package:sell_streams/presentation/journeys/movies/movie_details.dart';
 import 'package:sell_streams/presentation/journeys/profile/profile_details.dart';
+import 'package:sell_streams/presentation/journeys/cart/index.dart';
 import 'package:sell_streams/presentation/journeys/widgets/policy_view.dart';
 import 'package:sell_streams/presentation/journeys/widgets/purchase_history.dart';
 import 'package:sell_streams/utils/strings.dart';
@@ -32,6 +33,9 @@ class AppRouter {
         break;
       case policyRoute:
         return MaterialPageRoute(builder: (_)=> PolicyView());
+        break;
+      case cartRoute:
+        return MaterialPageRoute(builder: (_)=> CartView());
         break;
       default:
         return MaterialPageRoute(

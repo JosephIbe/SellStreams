@@ -3,13 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+
 import 'package:sell_streams/data/core/api_constants.dart';
 import 'package:sell_streams/data/models/user_model.dart';
+
 import 'package:sell_streams/presentation/blocs/user/user.dart';
+
 import 'package:sell_streams/presentation/journeys/widgets/app_text_field.dart';
 import 'package:sell_streams/presentation/journeys/widgets/loader_widget.dart';
+
 import 'package:sell_streams/utils/constants.dart';
+
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class EditProfileDetails extends StatelessWidget {
 
@@ -190,7 +195,15 @@ class _EditProfileDetailsFormPageState extends State<EditProfileDetailsFormPage>
                         onPressed: () async {
                           String userId = await storage.read(key: APIConstants.USER_ID_KEY);
                           print('userId in editprofilepage is\t$userId');
-                          if(userId != null){}
+                          if(userId != null){
+                            Map<String, dynamic> body = {
+                              "id": userId,
+                              "username": usernameController.text,
+                              "email": emailController.text,
+                              "phone": phoneController.text,
+                            };
+                            BlocProvider.of<UserBloc>(context).add(UpdateUserProfileDetails(body: body));
+                          }
                         },
                         elevation: 2.0,
                         padding: EdgeInsets.symmetric(horizontal: 115.0, vertical: 15.0),

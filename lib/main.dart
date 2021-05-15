@@ -11,10 +11,12 @@ import 'package:sell_streams/utils/router.dart';
 import 'data/repositories/genres_repository_impl.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'data/repositories/user_repository_impl.dart';
+import 'data/repositories/cart_repository_impl.dart';
 
 import 'domain/repositories/genres_repository.dart';
 import 'domain/repositories/movie_repository.dart';
 import 'domain/repositories/user_repository.dart';
+import 'domain/repositories/cart_repository.dart';
 
 import 'package:pedantic/pedantic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ import 'package:sell_streams/di/get_it.dart' as getIt;
 import 'presentation/blocs/genres/genres.dart';
 import 'presentation/blocs/movies/movies.dart';
 import 'presentation/blocs/user/user.dart';
+import 'presentation/blocs/cart/cart.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +42,9 @@ void main() {
             ),
             RepositoryProvider<GenresRepository>(
               create: (context) => GenresRepositoryImpl(dataSource: getIt.getItInstance()),
+            ),
+            RepositoryProvider<CartRepository>(
+              create: (context) => CartRepositoryImpl(dataSource: getIt.getItInstance()),
             ),
           ],
           child: MultiBlocProvider(
@@ -65,6 +71,12 @@ void main() {
                 create: (context){
                   final repo = context.read<GenresRepository>();
                   return GenresBloc(repo)..add(FetchAllGenres());
+                },
+              ),
+              BlocProvider<CartBloc>(
+                create: (context){
+                  final repo = context.read<CartRepository>();
+                  return CartBloc(repo)..add(FetchAllCartItems());
                 },
               ),
             ],

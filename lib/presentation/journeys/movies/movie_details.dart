@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:better_player/better_player.dart';
 import 'package:sell_streams/data/models/movie_model.dart';
 import 'package:sell_streams/utils/constants.dart';
 import 'package:sell_streams/utils/strings.dart';
 
+import 'package:sell_streams/presentation/blocs/cart/cart.dart';
+
+import 'package:better_player/better_player.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetails extends StatefulWidget {
 
@@ -164,7 +167,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                   bottom: 30.0,
                   left: width * 0.25,
                   child: RaisedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      print(widget.movie.id);
+                      BlocProvider.of<CartBloc>(context).add(AddToCartItems(movieId: widget.movie.id));
+                    },
                     elevation: 2.0,
                     padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
                     color: Colors.red,

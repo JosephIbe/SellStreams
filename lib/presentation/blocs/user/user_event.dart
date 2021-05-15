@@ -12,10 +12,10 @@ abstract class UserEvent extends Equatable {
 
 class GetUserProfileDetails extends UserEvent {}
 
-class EditUserProfileDetails extends UserEvent {
+class UpdateUserProfileDetails extends UserEvent {
 
   final dynamic body;
-  EditUserProfileDetails({@required this.body});
+  UpdateUserProfileDetails({@required this.body});
 
   @override
   List<Object> get props => [body];

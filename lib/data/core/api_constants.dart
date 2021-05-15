@@ -7,6 +7,7 @@ class APIConstants {
   static const String USER_SEGMENT = '/api/v1/user';
   static const String MOVIES_SEGMENT = '/api/v1/movies';
   static const String GENRES_SEGMENT = '/api/v1/genres';
+  static const String CART_SEGMENT = '/api/v1/cart';
   static const String ORDERS_SEGMENT = '/api/v1/orders';
 
   static const ACCESS_TOKEN_KEY = 'access_token';

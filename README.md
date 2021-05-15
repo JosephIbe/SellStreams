@@ -1,6 +1,6 @@
 # sell_streams
 
-A new Flutter application.
+A demo of a movie purchase app, not everything imaginable has been included.
 
 ## Getting Started
 

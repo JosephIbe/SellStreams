@@ -18,7 +18,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if(event is GetUserProfileDetails){
       yield* _mapGetUserProfileDetailsToState(event);
     }
-    if(event is EditUserProfileDetails){
+    if(event is UpdateUserProfileDetails){
       yield* _mapEditUserProfileDetailsToState(event);
     }
   }
@@ -38,7 +38,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  Stream<UserState> _mapEditUserProfileDetailsToState(EditUserProfileDetails event) async* {
+  Stream<UserState> _mapEditUserProfileDetailsToState(UpdateUserProfileDetails event) async* {
     yield UserStateLoading();
     try {
       final editedUser = await _userRepository.editCurrentUser(event.body);
@@ -49,7 +49,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     } catch(err){
       print(err);
-      yield UserStateFailure(errorMessage: err.message ?? 'Could Not Update Your Profile Details at the moment!');
+      yield UserStateFailure(errorMessage: 'Could Not Update Your Profile Details at the moment!');
     }
   }
 }

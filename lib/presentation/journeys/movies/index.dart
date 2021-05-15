@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:sell_streams/data/models/movie_model.dart';
+
+import 'package:sell_streams/presentation/blocs/movies/movies.dart';
+
+import 'package:sell_streams/presentation/journeys/widgets/loader_widget.dart';
+import 'package:sell_streams/presentation/journeys/widgets/movie_item_card.dart';
+
+import 'package:sell_streams/utils/constants.dart';
+import 'package:sell_streams/utils/strings.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sell_streams/data/models/movie_model.dart';
-import 'package:sell_streams/presentation/blocs/movies/movies.dart';
-import 'package:sell_streams/presentation/journeys/widgets/loader_widget.dart';
-import 'package:sell_streams/presentation/journeys/widgets/movie_item_card.dart';
-import 'package:sell_streams/utils/constants.dart';
-import 'package:sell_streams/utils/strings.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -50,12 +54,16 @@ class _HomeViewState extends State<HomeView> {
                                 Text(bookFavoriteMovieTxt, style: kSubHeaderTextStyle, textAlign: TextAlign.start,),
                               ],
                             ),
-                            Container(
-                              height: h * 0.08,
-                              width:  60.0,
-                              decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  shape: BoxShape.circle
+                            GestureDetector(
+                              onTap: ()=> Navigator.pushNamed(context, cartRoute),
+                              child: Container(
+                                height: h * 0.08,
+                                width:  60.0,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    shape: BoxShape.circle
+                                ),
+                                child: Icon(Icons.shopping_cart, color: Colors.white,),
                               ),
                             )
                           ],

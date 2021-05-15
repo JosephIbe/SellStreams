@@ -9,6 +9,7 @@ const String policyRoute = '/privacy-policy';
 const String purchaseHistoryRoute = '/purchase-history';
 const String movieDetailsRoute = '/movie-details';
 const String profileDetailsRoute = '/profile-details';
+const String cartRoute = '/cart';
 
 /***
  *  Text Literals
